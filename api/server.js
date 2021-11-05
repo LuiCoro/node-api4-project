@@ -39,6 +39,19 @@ const registeredUsers = [
   },
 ]
 
+const loggedUsers = [
+  {
+    id: 1,
+    username: 'OmiSpace',
+    password: 'SpaceMan98',
+  },
+  {
+    id: 2,
+    username: 'BobsBurgers',
+    password: 'BurgersAreC00l',
+  },
+]
+
 
 server.get('/', (req, res) => {
   res.status(200).json(`Server is up and runnning`)
@@ -58,7 +71,7 @@ server.get('/api/users', (req, res) => {
 })
 
 // GETS An Array Of Registered Users
-server.get('/api/registeredUsers', (req, res) => {
+server.get('/api/register', (req, res) => {
   try {
     if (!registeredUsers) {
       res.status(404).json({message: 'User can not be registered!'})
@@ -69,6 +82,16 @@ server.get('/api/registeredUsers', (req, res) => {
     res.status(500).json({message: 'Error with server'})
   }
 })
+
+// POSTS
+server.post('/api/register', (req, res) => {
+try {
+  res.status(200).json(registeredUsers)
+} catch (error) {
+  res.status(500).json({message: 'Error with server'})
+}
+})
+
 
 
 module.exports = server
